@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>Controle de LED</title>
+ </head>
+ <body>
+  <h2>Controle de LED</h2>
+  O LED está
+  {% if led %}
+   ligado.
+   <button type="button"
+   onclick="window.location.href='/led/0';">
+   Desligar</button>
+  {% else %}
+   desligado.
+   <button type="button"
+   onclick="window.location.href='/led/1';">
+   Ligar</button>
+  {% endif %}
+  <br>
+  <h2>Quantidade de Cliks no botão</h2>
+ </body>
+</html>
