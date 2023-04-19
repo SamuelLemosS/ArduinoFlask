@@ -1,4 +1,4 @@
-#from singleton import Arduino
+from singleton import Arduino
 from flask import Flask, render_template
 import pyfirmata
 
@@ -16,22 +16,25 @@ def inicio():
 
 @app.route('/led/1')
 def ligar_led():
-    #arduino = Arduino()
-    board.digital[LED].write(1)
+    arduino = Arduino()
+    arduino.digitalWrite(LED, 1)
+    #board.digital[LED].write(1)
     estado['led'] = True
     return mostra_estado()
 
 @app.route('/led/0')
 def desl_led():
-    #arduino = Arduino()
-    board.digital[LED].write(0)
+    arduino = Arduino()
+    arduino.digitalWrite(LED, 0)
+    #board.digital[LED].write(0)
     estado['led'] = False
     return mostra_estado()
 
 def mostra_estado():
     global qntclik
-    #arduino = Arduino()
-    click = board.digital[BOTAO].read()
+    arduino = Arduino()
+    click = arduino.digitalRead(BOTAO)
+    #click = board.digital[BOTAO].read()
     #click='teste'
     if click==True:
        qntclik = qntclik + 1
