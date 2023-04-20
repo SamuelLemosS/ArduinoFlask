@@ -1,6 +1,6 @@
 import pyfirmata
 
-PORTA = 'COM4'
+PORTA = 'COM5'
 
 def singleton(cls):
  instances = {}
@@ -20,6 +20,11 @@ class Arduino(object):
   self.board.digital[pin].mode = pyfirmata.OUTPUT
   self.board.digital[pin].write(value)
   
- def digitalRead(self, pin):
-  self.board.digital[pin].mode = pyfirmata.INPUT
-  return self.board.digital[pin].read()
+ def analogRead(self, pin):
+  it = pyfirmata.util.Iterator(self.board)
+  it.start()
+  self.board.analog[pin].enable_reporting()
+  valor = 'None'
+  while valor =='None':
+    valor = str(self.board.analog[pin].read())
+  return float(valor)
